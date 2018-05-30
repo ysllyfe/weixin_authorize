@@ -3,6 +3,11 @@ module WeixinAuthorize
   module Api
     module Template
 
+      #获取模板列表
+      def get_all_templates
+        http_get("/template/get_all_private_template")
+      end
+
       # 设置所属行业
       # 需要选择公众账号服务所处的2个行业，每月可更改1次所选行业；
       # 初始化行业时，传入两个，每月更改时，传入一个即可。
@@ -21,11 +26,19 @@ module WeixinAuthorize
       end
 
       # 发送模板消息
-      def send_template_msg(touser, template_id, url, topcolor, data)
+      def send_template_msg(touser, template_id, url, data, appid = nil, pagepath = nil)
         msg = {
           touser: touser, template_id: template_id,
-          url: url, topcolor: topcolor, data: data
+          url: url, data: data
         }
+        if appid && pagepath
+          msg.merge!({
+            miniprogram: {
+              appid: appid,
+              pagepath: pagepath
+            }
+          })
+        end
         http_post("/message/template/send", msg)
       end
 
