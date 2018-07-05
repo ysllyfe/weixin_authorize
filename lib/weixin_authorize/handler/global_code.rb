@@ -42,6 +42,7 @@ module WeixinAuthorize
     40039 => "不合法的URL长度",
     40050 => "不合法的分组id",
     40051 => "分组名字不合法",
+    40166 => "不合法的appid",
     41001 => "缺少access_token参数",
     41002 => "缺少appid参数",
     41003 => "缺少refresh_token参数",
