@@ -42,6 +42,22 @@ module WeixinAuthorize
         http_post("/message/template/send", msg)
       end
 
+      def send_subscribe_msg(touser, template_id, url, title, scene, data, appid = nil, pagepath = nil)
+        msg = {
+          touser: touser, template_id: template_id,
+          url: url, data: data, scene: scene, title: title
+        }
+        if appid && pagepath
+          msg.merge!({
+            miniprogram: {
+              appid: appid,
+              pagepath: pagepath
+            }
+          })
+        end
+        http_post("/message/template/subscribe", msg)
+      end
+
     end
   end
 end
